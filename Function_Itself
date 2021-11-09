@@ -1,0 +1,32 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader b = new BufferedReader(new InputStreamReader(System.in));
+        String a = b.readLine();
+        int n = Integer.parseInt(b.readLine());
+        String a1 ="";
+        String a2 = "";
+        int t = 0;
+        while (a.charAt(t) != ','){
+            a1+=a.charAt(t);
+            a2+=a.charAt(t);
+            t++;
+        }
+        for (int i = 0; i < a.length(); i++) {
+            char c = a.charAt(i);
+            if(c == ','){
+                for (int j = i; j <= n+a2.length(); j++) {
+                    a1 += a.charAt(j);
+                }
+                if(Integer.parseInt(Character.toString(a.charAt(a1.length()))) >= 5){
+                    int s = Integer.parseInt(Character.toString(a1.charAt(a1.length()-1)))+1;
+                    a1 = a1.replace(Character.toString(a1.charAt(a1.length()-1)), Integer.toString(s));
+                }
+            }
+        }
+        System.out.println(a1);
+    }
+}
