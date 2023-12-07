@@ -29,8 +29,10 @@ if ! [ -f "$2" ]; then
     exit 1
 fi
 
-content1=$(awk -v RS='string:' 'NR>1' "$1")
-content2=$(awk -v RS='string:' 'NR>1' "$2")
+content1=$(sed -n '/string:/,$p' "$1")
+content1=${content1#*string:}
+content2=$(sed -n '/string:/,$p' "$2")
+content2=${content2#*string:}
 
 if [[ "$content1" == "$content2" ]]; then
     if [[ "$verbose" == "true" ]]; then
