@@ -32,7 +32,6 @@ fi
 content1=$(awk -v RS='string:' 'NR>1' "$1")
 content2=$(awk -v RS='string:' 'NR>1' "$2")
 
-
 if [[ "$content1" == "$content2" ]]; then
     if [[ "$verbose" == "true" ]]; then
         echo "Contents of $1 and $2 are equal"
