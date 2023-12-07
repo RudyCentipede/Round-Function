@@ -29,8 +29,9 @@ if ! [ -f "$2" ]; then
     exit 1
 fi
 
-content1=$(grep "string:"  "$1" | cut -d':' -f2-)
-content2=$(grep "string:"  "$1" | cut -d':' -f2-)
+content1=$(awk -v RS='string:' 'NR>1' "$1")
+content2=$(awk -v RS='string:' 'NR>1' "$2")
+
 
 if [[ "$content1" == "$content2" ]]; then
     if [[ "$verbose" == "true" ]]; then
