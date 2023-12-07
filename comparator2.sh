@@ -2,7 +2,6 @@
 verbose=false
 if [[ "$3" == "-v" ]]; then
     verbose=true
-
 fi
 
 if [[ "$verbose" == true ]]; then
@@ -12,14 +11,27 @@ if [[ "$verbose" == true ]]; then
     fi
 else
     if [[ $# -ne 2 ]]; then
-        echo "Usage: $0 file1 file2 [-v]"
         exit 1
     fi
 fi
 
-content1=$(awk -F 'string:' '{for (i=2; i<=NF; i++) print $i}' "$1")
-echo $content1
-content2=$(awk -F 'string:' '{print $2}' "$2")
+if ! [ -f "$1" ]; then
+    if [[ "$verbose" == "true" ]]; then
+        echo "File1 does not exist"
+    fi
+    exit 1
+fi
+
+if ! [ -f "$2" ]; then
+    if [[ "$verbose" == "true" ]]; then
+        echo "File2 does not exist"
+    fi
+    exit 1
+fi
+
+content1=$(grep "string:"  "$1" | cut -d':' -f2-)
+content2=$(grep "string:"  "$1" | cut -d':' -f2-)
+
 if [[ "$content1" == "$content2" ]]; then
     if [[ "$verbose" == "true" ]]; then
         echo "Contents of $1 and $2 are equal"
