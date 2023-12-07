@@ -17,7 +17,8 @@ else
     fi
 fi
 
-content1=$(awk -F 'string:' '{print $2}' "$1")
+content1=$(awk -F 'string:' '{for (i=2; i<=NF; i++) print $i}' "$1")
+echo $content1
 content2=$(awk -F 'string:' '{print $2}' "$2")
 if [[ "$content1" == "$content2" ]]; then
     if [[ "$verbose" == "true" ]]; then
