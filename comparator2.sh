@@ -10,9 +10,8 @@ if [[ $# -ne 2 ]]; then
     exit 1
 fi
 
-content1=$(awk '/string:/{print $0}' "$1")
-content2=$(awk '/string:/{print $0}' "$2")
-
+content1=$(awk -F 'string:' '{print $2}' "$1")
+content2=$(awk -F 'string:' '{print $2}' "$2")
 if [[ "$content1" == "$content2" ]]; then
     exit 0
 else
