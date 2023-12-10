@@ -6,7 +6,6 @@ if [[ $# == 3 ]]; then
         verbose=true
         file1="$1"
         file2="$2"
-
     else
         echo "Usage: $0 file1 file2 [-v]"
         exit 1
