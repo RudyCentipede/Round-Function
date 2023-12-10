@@ -23,3 +23,11 @@ if [[ $? -eq 1 ]]; then
 else
     echo True
 fi
+
+echo -n "file3 equal file4: "
+./comparator2.sh tests/file3 tests/file4
+if [[ $? -eq 1 ]]; then
+    echo False
+else
+    echo True
+fi
